@@ -5,7 +5,7 @@
   "author": "kjuulh <hermansendev@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "NODE_ENV=local concurrently --kill-others \"tsc -w -p src\" \"nodemon dist/index.js -e ts\"",
+    "dev": "NODE_ENV=local ENVIRONMENT=development concurrently --kill-others \"tsc -w -p src\" \"nodemon dist/index.js -e ts\"",
     "build": "tsc -p src",
     "start": "node dist/index.js",
     "format": "prettier --write 'src/**/*ts'",
