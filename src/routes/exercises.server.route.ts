@@ -6,7 +6,11 @@ export default class ExercisesRoute {
   constructor(app: Express) {
     app
       .route('/workouts/:workoutId/exercises')
-      .get(exercisesController.createPage)
       .post(exercisesController.create)
+      .get(exercisesController.getByWorkout)
+    app
+      .route('/workouts/:workoutId/exercises/:exerciseId')
+      .put(exercisesController.update)
+      .get(exercisesController.getByWorkoutAndExerciseId)
   }
 }

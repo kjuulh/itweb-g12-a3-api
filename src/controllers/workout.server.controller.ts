@@ -1,9 +1,84 @@
 import { Request, Response } from 'express'
+import e = require('express')
 import { Mongoose } from 'mongoose'
 import { Exercise, IExercise } from '../models/exercise.model'
 import { IWorkout, Workout } from '../models/workout.model'
 
 export default class WorkoutsController {
+  public getAll(req: Request, res: Response, next: Function): void {
+    Workout.find()
+      .then(workouts => res.json(workouts))
+      .catch(err => next(err))
+  }
+
+  public getById(req: Request, res: Response, next: Function): void {
+    const { workoutId } = req.params
+    Workout.findOne({ _id: workoutId })
+      .then(workout => res.json(workout))
+      .catch(err => next(err))
+  }
+
+  public create(req: Request, res: Response, next: Function): void {
+    const { name, description } = req.body
+    const userId = (req.user as any).sub
+
+    const workout = new Workout({
+      name,
+      description,
+      ownerId: userId,
+    })
+      .save()
+      .then(w => res.json(w))
+      .catch(err => next(err))
+  }
+
+  public update(req: Request, res: Response, next: Function): void {
+    const { name, description, _id } = req.body
+    const { workoutId } = req.params
+    const userId = (req.user as any).sub
+
+    if (_id !== workoutId) {
+      res.status(400).json({ message: 'Invalid workout id' })
+      return
+    }
+
+    Workout.findOne({ _id: workoutId })
+      .then(workout => {
+        if (userId != workout.ownerId) {
+          res.status(401).json({ message: 'Invalid resource' })
+        } else {
+          workout.name = name
+          workout.description = description
+          workout
+            .save()
+            .then(w => res.json(w))
+            .catch(err => next(err))
+        }
+      })
+      .catch(err => next(err))
+  }
+
+  public delete(req: Request, res: Response, next: Function): void {
+    const { workoutId } = req.params
+    const userId = (req.user as any).sub
+
+    Workout.findOne({ _id: workoutId })
+      .then(w => {
+        if (w == null) {
+          res.status(404).json({ message: 'Resource not found' })
+        }
+        if (w.ownerId !== (userId as string)) {
+          res.status(401).json({ message: 'Invalid resource' })
+        } else {
+          Workout.deleteOne({ _id: w._id })
+            .then(ok => res.status(204).json({ message: 'ok' }))
+            .catch(err => next(err))
+        }
+      })
+      .catch(err => next(err))
+  }
+
+  /*
   public createWorkout(req: Request, res: Response, next: Function): void {
     const workout = new Workout({
       ownerId: req.user['_id'],
@@ -88,6 +163,7 @@ export default class WorkoutsController {
       }
     )
   }
+  */
 }
 
 export const workoutsController = new WorkoutsController()
