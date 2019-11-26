@@ -1,7 +1,7 @@
 {
-  "name": "itweb-g12-a1",
+  "name": "itweb-g12-a3",
   "version": "1.0.0",
-  "repository": "git@github.com:kjuulh/itweb-g12-a1.git",
+  "repository": "git@github.com:kjuulh/itweb-g12-a3.git",
   "author": "kjuulh <hermansendev@gmail.com>",
   "license": "MIT",
   "scripts": {
@@ -37,7 +37,7 @@
     "@types/passport-local": "^1.0.33",
     "concurrently": "^4.1.2",
     "nodemon": "^1.19.2",
-    "prettier": "^1.18.2",
+    "prettier": "^1.19.1",
     "ts-node": "^8.4.1",
     "tslint": "^5.20.0",
     "typescript": "^3.6.3"
