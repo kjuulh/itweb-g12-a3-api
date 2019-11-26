@@ -1,0 +1,45 @@
+{
+  "name": "itweb-g12-a1",
+  "version": "1.0.0",
+  "repository": "git@github.com:kjuulh/itweb-g12-a1.git",
+  "author": "kjuulh <hermansendev@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "NODE_ENV=local concurrently --kill-others \"tsc -w -p src\" \"nodemon dist/index.js -e ts\"",
+    "build": "tsc -p src",
+    "start": "node dist/index.js",
+    "format": "prettier --write 'src/**/*ts'",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "^0.0.3",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "glob": "^7.1.4",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "mongoose": "^5.7.1",
+    "node-uuid": "^1.4.8",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "passport-remember-me": "^0.0.1",
+    "sync-request": "^6.1.0",
+    "tslint-config-prettier": "^1.18.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt-nodejs": "^0.0.30",
+    "@types/express": "^4.17.1",
+    "@types/glob": "^7.1.1",
+    "@types/lodash": "^4.14.138",
+    "@types/mongodb": "^3.3.2",
+    "@types/mongoose": "^5.5.17",
+    "@types/passport": "^1.0.1",
+    "@types/passport-local": "^1.0.33",
+    "concurrently": "^4.1.2",
+    "nodemon": "^1.19.2",
+    "prettier": "^1.18.2",
+    "ts-node": "^8.4.1",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.3"
+  }
+}
