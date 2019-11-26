@@ -1,9 +1,9 @@
-import * as jwt from 'express-jwt'
-import * as pathToRegexp from 'path-to-regexp'
-import Config from './../config/config'
+import * as jwt from 'express-jwt';
+import * as pathToRegexp from 'path-to-regexp';
+import Config from './../config/config';
 
 const jwtMiddleware = () => {
-  const secret = '123123123123123123123'
+  const secret = process.env.PASSWORD_SECRET;
   return jwt({ secret }).unless({
     path: [
       { url: pathToRegexp('/authenticate'), methods: ['POST'] },
@@ -19,7 +19,7 @@ const jwtMiddleware = () => {
       },
       { url: pathToRegexp('*'), methods: ['OPTIONS'] },
     ],
-  })
-}
+  });
+};
 
-export default jwtMiddleware
+export default jwtMiddleware;
