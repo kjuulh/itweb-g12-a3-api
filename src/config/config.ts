@@ -15,6 +15,7 @@ export default class Config {
     process.env.NODE_ENV !== 'remote' ? '{"secret": "abc123"}' : '';
 
   public static originsWhitelist = [
+    'http://localhost:3000',
     'http://localhost:4200',
     'https://itweb-g12-a2-app.herokuapp.com',
     'https://itweb-g12-a2-app.herokuapp.com/',

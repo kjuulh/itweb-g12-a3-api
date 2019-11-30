@@ -18,15 +18,19 @@ export default class AuthenticationController {
 
   public authenticate(req: Request, res: Response, next: Function): void {
     const secret = process.env.PASSWORD_SECRET;
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
-    User.findOne({ email })
+    User.findOne({ username })
       .then((user) => {
-        if (user.validateHash(password)) {
-          const token = jwtSign({ sub: user._id }, secret);
-          res.status(200).json({ id: user._id, token });
+        if (user == null) {
+          res.status(400).json({ status: 'User was not found' });
         } else {
-          res.status(400).json({ status: 'incorrect email or password' });
+          if (user.validateHash(password)) {
+            const token = jwtSign({ sub: user._id }, secret);
+            res.status(200).json({ id: user._id, token });
+          } else {
+            res.status(400).json({ status: 'incorrect email or password' });
+          }
         }
       })
       .catch((err) => next(err));
@@ -38,7 +42,6 @@ export default class AuthenticationController {
     User.find({ email: user.email })
       .then((exists) => {
         if (exists.length > 0) {
-          console.log(exists);
           res.status(400).json({ status: 'User already exists' });
         } else {
           user.password = user.generateHash(user.password);
@@ -48,9 +51,8 @@ export default class AuthenticationController {
               .then((user) => {
                 res.status(201).json({
                   id: user._id,
+                  username: user.username,
                   email: user.email,
-                  firstName: user.firstName,
-                  lastName: user.lastName,
                 });
               })
               .catch((error) => res.status(400).send(error));
