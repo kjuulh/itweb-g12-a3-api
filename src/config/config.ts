@@ -16,10 +16,8 @@ export default class Config {
 
   public static originsWhitelist = [
     'http://localhost:3000',
-    'http://localhost:4200',
-    'https://itweb-g12-a2-app.herokuapp.com',
-    'https://itweb-g12-a2-app.herokuapp.com/',
-    'https://itweb-g12-a2-api.herokuapp.com',
+    'https://itweb-g12-a3-app.herokuapp.com',
+    'https://itweb-g12-a3-api.herokuapp.com',
   ];
 
   public static globFiles(location: string): string[] {
