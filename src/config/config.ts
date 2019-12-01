@@ -18,6 +18,8 @@ export default class Config {
     'http://localhost:3000',
     'https://itweb-g12-a3-app.herokuapp.com',
     'https://itweb-g12-a3-api.herokuapp.com',
+    'https://itweb-g12-a3-app-staging.herokuapp.com',
+    'https://itweb-g12-a3-api-staging.herokuapp.com',
   ];
 
   public static globFiles(location: string): string[] {
