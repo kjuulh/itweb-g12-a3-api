@@ -26,6 +26,8 @@
     "passport-local": "^1.0.0",
     "passport-remember-me": "^0.0.1",
     "path-to-regexp": "^3.1.0",
+    "socketio": "^1.0.0",
+    "socketio-jwt": "auth0-community/auth0-socketio-jwt",
     "sync-request": "^6.1.0",
     "tslint-config-prettier": "^1.18.0"
   },
